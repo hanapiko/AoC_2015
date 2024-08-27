@@ -1,12 +1,14 @@
 package main
 
 import (
-	"os"
 	"fmt"
+	"os"
+
 	"AoC_2015/day_1/floor"
 )
 
 func main() {
+	// welcome
 	if len(os.Args) != 1 {
 		return
 	}
@@ -15,6 +17,6 @@ func main() {
 		fmt.Println("error opening file")
 	}
 
-	dest :=  floor.FloorNum(string(file))
+	dest := floor.FloorNum(string(file))
 	fmt.Println(dest)
 }
