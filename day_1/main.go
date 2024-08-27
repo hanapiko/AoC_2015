@@ -18,5 +18,8 @@ func main() {
 	}
 
 	dest := floor.FloorNum(string(file))
+	Position := floor.Position(string(file))
+
 	fmt.Println(dest)
+	fmt.Println(Position)
 }
