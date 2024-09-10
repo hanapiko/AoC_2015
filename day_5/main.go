@@ -15,21 +15,29 @@ func main() {
 		return
 	}
 	defer file.Close()
+	var count1 int
+	var count2 int
 	scanner := bufio.NewScanner(file)
-	slc := []string{}
+	//slc := []string{}
 	// Read through the file line by line and count vowels
 	for scanner.Scan() {
 		line := scanner.Text()
-
-		slc = append(slc, line)
+		if IsNice(line) {
+			count1++
+		}
+		if isNicePartTwo(line) {
+			count2++
+		}
+		 
 	}
 	// Check for any errors that occurred during scanning
 	if err := scanner.Err(); err != nil {
 		fmt.Println("Error reading file:", err)
 		return
 	}
-
-	fmt.Println(Nice(slc))
+	//fmt.Println(countNice((slc)))
+	fmt.Println(count1)
+	fmt.Println(count2)
 }
 
 func IsVowel(s string) bool {
@@ -72,13 +80,30 @@ func IsNice(s string) bool {
 	return false
 }
 
-func Nice(str []string) int {
-	count := 0
+// part two
+func isNicePartTwo(s string) bool {
+    return hasRepeatedPair(s) && hasRepeatingWithOneBetween(s)
+}
 
-	for _, s := range str {
-		if IsNice(s) {
-			count++
-		}
-	}
-	return count
+func hasRepeatedPair(s string) bool {
+    seen := make(map[string]int)
+
+    for i := 0; i < len(s)-1; i++ {
+        pair := s[i : i+2]
+        seen[pair]++
+        if seen[pair] == 2 {
+            return true
+        }
+    }
+
+    return false
+}
+
+func hasRepeatingWithOneBetween(s string) bool {
+    for i := 0; i < len(s)-2; i++ {
+        if s[i] == s[i+2] {
+            return true
+        }
+    }
+    return false
 }
